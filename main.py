@@ -4,7 +4,7 @@ from datetime import datetime
 import locale
 from query import Query
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox, font
 
 
 class ConexionSql:
@@ -194,7 +194,7 @@ class App(tk.Tk):
         self.result_compras.config(text=f"{total_iva_v:,}")
         self.result_ventas.config(text=f"{total_iva_c:,}")
         self.result_retenciones.config(text=f"{total_iva_r:,}")
-        self.result_posicion.config(text=posicion_str)
+        self.result_posicion.config(text=posicion_str, font=font.Font(weight='bold'))
         self.result_saldo.config(text=saldo) 
 
 
