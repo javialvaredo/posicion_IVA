@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
+import calendar
 
 class Mes_actual:
 
     def fecha_inicio_fecha_fin(self):
-        from datetime import datetime, timedelta
-
+        
         # Obtener la fecha actual
         fecha_actual = datetime.now()
 
@@ -26,15 +26,42 @@ class Mes_actual:
         return (fecha_inicial_formateada, fecha_final_formateada)
 
 
+class Fecha_posicion:
+
+    def fecha_inicio_fecha_fin(self, mes, año):
+        self.mes = int(mes)
+        self.año = int(año)
+
+    # Obtener el número de días en el mes
+        dias_en_mes = calendar.monthrange(self.año, self.mes)
+        dias_en_mes = dias_en_mes[1]
+
+        self.mes = str(self.mes)
+        if len(self.mes)<2:
+            self.mes=f"0{self.mes}"
+         
+        fecha_inicial = f"{self.año}-{self.mes}-01T00:00:00.000"
+        fecha_final = f"{self.año}-{self.mes}-{dias_en_mes}T23:59:59.999"
+
+                               
+        # Formatear las fechas en el formato deseado
+        #fecha_inicial_formateada = fecha_inicial.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]
+        #fecha_final_formateada = fecha_final.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3]
+       
+        return (fecha_inicial, fecha_final)
+
+
 class Query:
 
-    def query_IVA_ventas(self):
-        mes_actual = Mes_actual()
-        fechas = mes_actual.fecha_inicio_fecha_fin()
+    def query_IVA_ventas(self, mes, año):
+        self.mes = mes
+        self.año = año
+
+        mes_actual = Fecha_posicion()
+        fechas = mes_actual.fecha_inicio_fecha_fin(self.mes, self.año)
         fecha_inicio = fechas[0]
         fecha_fin = fechas[1]
         
-
         #fecha_inicio = '2024-07-01T00:00:00.000'
         #fecha_fin = '2024-07-31T00:00:00.000'
 
@@ -67,12 +94,14 @@ class Query:
         
         return self.query_IV
     
-    def query_IVA_compras(self):
-        mes_actual = Mes_actual()
-        fechas = mes_actual.fecha_inicio_fecha_fin()
+    def query_IVA_compras(self, mes, año):
+        self.mes = mes
+        self.año = año
+        mes_actual = Fecha_posicion()
+        fechas = mes_actual.fecha_inicio_fecha_fin(self.mes, self.año)
         fecha_inicio = fechas[0]
         fecha_fin = fechas[1]
-
+      
         #fecha_inicio = '2024-07-01T00:00:00.000'
         #fecha_fin = '2024-07-31T00:00:00.000'
 
@@ -109,12 +138,18 @@ class Query:
         return self.query_IC
     
     
-    def query_IVA_retenciones(self):
-        mes_actual = Mes_actual()
-        fechas = mes_actual.fecha_inicio_fecha_fin()
+    def query_IVA_retenciones(self, mes, año):
+        self.mes = mes
+        self.año = año
+
+        self.mes = mes
+        self.año = año
+        mes_actual = Fecha_posicion()
+        fechas = mes_actual.fecha_inicio_fecha_fin(self.mes, self.año)
         fecha_inicio = fechas[0]
         fecha_fin = fechas[1]
 
+        
         #fecha_inicio = '2024-07-01T00:00:00.000'
         #fecha_fin = '2024-07-31T00:00:00.000'
 
@@ -139,9 +174,22 @@ class Query:
 
 if __name__ == '__main__':
 
-   obj = Query()
+
+   """obj = Query()
    query = obj.query_IVA_ventas()
-   print(query)
+   print(query)"""
+
+   año = 2024
+   mes = 7
+
+   dias = Fecha_posicion()
+   dias.fecha_inicio_fecha_fin(2024,7)
+   
+   print(dias)
+
+   
+
+   
     
         
 
