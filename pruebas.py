@@ -200,11 +200,7 @@ class App(tk.Tk):
         self.mes = self.entry_mes.get().strip()
         self.año = self.entry_año.get().strip()
 
-        if not self.mes or not self.año:  # Use current month and year if no input
-            mes_actual = Mes_actual()
-            self.mes = mes_actual.mes_actual
-            self.año = mes_actual.año_actual
-
+     
         # Proceed with the calculation using the specified month and year
         a = iva_compras(self.conexion, self.mes, self.año)
         b = iva_ventas(self.conexion, self.mes, self.año)

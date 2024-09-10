@@ -41,7 +41,7 @@ class Fecha_posicion:
             self.mes=f"0{self.mes}"
          
         fecha_inicial = f"{self.año}-{self.mes}-01T00:00:00.000"
-        fecha_final = f"{self.año}-{self.mes}-{dias_en_mes}T23:59:59.999"
+        fecha_final = f"{self.año}-{self.mes}-{dias_en_mes}T23:59:59.000"
 
                                
         # Formatear las fechas en el formato deseado
@@ -63,7 +63,7 @@ class Query:
         fecha_fin = fechas[1]
         
         #fecha_inicio = '2024-07-01T00:00:00.000'
-        #fecha_fin = '2024-07-31T00:00:00.000'
+        #fecha_fin = '2024-07-31T23:59:59.000'
 
 
         self.query_IV = f"""DECLARE @__Debe_Key_2 nvarchar(4000) = N'D';
@@ -134,7 +134,7 @@ class Query:
         WHERE (CONVERT(date, [a].[FECHA_CONT]) >= @__p_2) AND (CONVERT(date, [a].[FECHA_CONT]) <= @__p_3)
         GROUP BY [a0].[ID_CUENTA], [a0].[COD_DESC_CUENTA]
         HAVING (([a0].[COD_DESC_CUENTA] IS NOT NULL AND (UPPER([a0].[COD_DESC_CUENTA]) = @__ToUpper_6)) OR ([a0].[COD_DESC_CUENTA] IS NOT NULL AND (UPPER([a0].[COD_DESC_CUENTA]) = @__ToUpper_7))) OR ([a0].[COD_DESC_CUENTA] IS NOT NULL AND (UPPER([a0].[COD_DESC_CUENTA]) = @__ToUpper_8))"""
-
+        print(self.query_IC)
         return self.query_IC
     
     

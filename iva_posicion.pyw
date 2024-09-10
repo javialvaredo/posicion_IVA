@@ -55,27 +55,6 @@ class ConexionSql:
         except Exception as e:
             print(f"Error closing the connection: {e}")
 
-"""
-class Mes_actual:
-
-    def __init__(self):
-        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
-        fecha_actual = datetime.now()
-        # Obtener el nombre del mes y el año actual
-        self.mes_actual = fecha_actual.strftime("%B")
-        self.año_actual = fecha_actual.year
-
-
-class Mes_actual:
-
-    def __init__(self):
-        fecha_actual = datetime.now()
-        # Obtener el mes y el año en formato numérico
-        self.mes_actual = fecha_actual.strftime("%m")  # Month in MM format
-        self.año_actual = fecha_actual.strftime("%y")  # Year in YY format
-"""
-
-
 class IVA_ventas:
     def __init__(self, lista_ventas):
         self.lista_ventas = lista_ventas
@@ -200,11 +179,7 @@ class App(tk.Tk):
         self.mes = self.entry_mes.get().strip()
         self.año = self.entry_año.get().strip()
 
-        """if not self.mes or not self.año:  # Use current month and year if no input
-            mes_actual = Mes_actual()
-            self.mes = mes_actual.mes_actual
-            self.año = mes_actual.año_actual"""
-
+     
         # Proceed with the calculation using the specified month and year
         a = iva_compras(self.conexion, self.mes, self.año)
         b = iva_ventas(self.conexion, self.mes, self.año)
