@@ -62,9 +62,16 @@ class IVA_ventas:
     def procesar_datos(self):
         resultado_iva_ventas = {}
         clave = self.lista_ventas[0][1]
-        valor = float(round(self.lista_ventas[0][4], 2))
+    
+        valor_bruto = self.lista_ventas[0][4]
+        if valor_bruto is None:
+            valor = 0.0
+        else:
+            valor = float(round(valor_bruto, 2))
+    
         resultado_iva_ventas[clave] = valor
         return resultado_iva_ventas
+
 
 
 class IVA_compras:
@@ -75,9 +82,14 @@ class IVA_compras:
         resultado_iva_compras = {}
         for item in self.lista_compras:
             clave = item[1]
-            valor = float(round(item[4], 2))
+            valor_bruto = item[4]
+            if valor_bruto is None:
+                valor = 0.0
+            else:
+                valor = float(round(valor_bruto, 2))
             resultado_iva_compras[clave] = valor
         return resultado_iva_compras
+
 
 
 class IVA_retenciones:
@@ -87,9 +99,16 @@ class IVA_retenciones:
     def procesar_datos(self):
         resultado_iva_retenciones = {}
         clave = "IVA Retenciones"
-        valor = float(round(self.lista_retenciones[0][0], 0))
+
+        valor_bruto = self.lista_retenciones[0][0]
+        if valor_bruto is None:
+            valor = 0.0
+        else:
+            valor = float(round(valor_bruto, 0))
+
         resultado_iva_retenciones[clave] = valor
         return resultado_iva_retenciones
+
 
 
 def iva_ventas(conexion, mes, año):
